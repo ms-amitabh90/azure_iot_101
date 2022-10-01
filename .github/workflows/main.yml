@@ -30,4 +30,4 @@ jobs:
       uses: Azure/cli@v1
       with:
         # Specify the script here
-        inlineScript: az deployment group create --resource-group iotlab-101 --template-file ./bicep/iac/device_base-env.bicep
+        inlineScript: az deployment group create --resource-group iotlab-101-rg --template-file ./bicep/iac/device_base-env.bicep
