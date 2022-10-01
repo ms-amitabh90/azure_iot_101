@@ -1,2 +1,5 @@
-# azure_iot_101
-azure iot basic setup
+[[toc]]
+- bicep for azure lab
+- learning docs
+- bash scripts to setup edge devices
+- demo presentaion
