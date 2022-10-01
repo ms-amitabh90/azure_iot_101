@@ -1,14 +1,19 @@
 on: [push]
 name: Azure ARM
 jobs:
-  build-and-deploy:
+  Iot-Lap-Deploy:
     runs-on: ubuntu-latest
     steps:
 
       # Checkout code
     - uses: actions/checkout@main
-    - name: Azure CLI Action
+    - name: Azure Login
       uses: Azure/cli@v1
       with:
         # Specify the script here
         inlineScript: az login --service-principal -u ${{ secrets.AZURE_AD_CLIENT_ID }} -p ${{ secrets.AZURE_AD_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_AD_TENANT_ID }}
+    - name: Bicep Deploy
+      uses: Azure/cli@v1
+      with:
+        # Specify the script here
+        inlineScript: az deployment group create --resource-group ansible-test --template-file ./bicep/iac/device_base-env.bicep
