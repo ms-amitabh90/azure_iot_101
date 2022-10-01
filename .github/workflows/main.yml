@@ -1,7 +1,7 @@
 on: [push]
 name: Azure ARM
 jobs:
-  Iot-Lap-Deploy:
+  Iot-Lab-Deploy:
     runs-on: ubuntu-latest
     steps:
 
@@ -12,8 +12,32 @@ jobs:
       with:
         # Specify the script here
         inlineScript: az login --service-principal -u ${{ secrets.AZURE_AD_CLIENT_ID }} -p ${{ secrets.AZURE_AD_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_AD_TENANT_ID }}
+    - name: Azure PowerShell Action
+      uses: Azure/powershell@v1
+      with:
+        # Specify the Az PowerShell script here.
+        inlineScript: |
+         Select-AzSubscription -Subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          $location = "East US"
+          $resourceGroupName = "iotlab-101"
+          if (!(Get-AzResourceGroup $resourceGroupName -ErrorAction SilentlyContinue)) {
+              try {
+                  # The resource group does not exist so create it
+                  Write-Host "Creating the $resourceGroupName resource group"
+                  New-AzResourceGroup -Name $resourceGroupName -Location $location -ErrorAction SilentlyContinue
+              }
+              catch {
+                  # There was an error creating the resoruce group
+                  Write-Host "There was an error creaating the $resourceGroupName resource group" -ForegroundColor Red
+                  Break
+              }
+          }
+          else {
+              # The resoruce group already exists so there is nothing to do
+              Write-Host "The $resourceGroupName resource group already exists"
+          }
     - name: Bicep Deploy
       uses: Azure/cli@v1
       with:
         # Specify the script here
-        inlineScript: az deployment group create --resource-group ansible-test --template-file ./bicep/iac/device_base-env.bicep
+        inlineScript: az deployment group create --resource-group iotlab-101 --template-file ./bicep/iac/device_base-env.bicep
