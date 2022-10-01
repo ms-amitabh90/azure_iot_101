@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "value": "czm14-conm-ppd-use2-edgedevice-vnet"
+        },
+        "rgName": {
+            "value": "czm14-conm-ppd-use2-vmfactory-rg"
+        },
+        "subnetName": {
+            "value": "czm14-conm-ppd-use2-edgedevice-snet"
+        },
+        "location": {
+            "value": "eastus2"
+        },
+        "environment": {
+            "value": "ppd"
+        },
+        "winVm1Name": {
+            "value": "czm14conmppduse2vmhyperv01"
+        },
+        "winVm2Name": {
+            "value": "czm14conmppduse2vmhyperv02"
+        },
+        "winVm1ComName": {
+            "value": "cz14cmppu2vhv1"
+        },
+        "winVm2ComName": {
+            "value": "cz14cmppu2vhv2"
+        },
+        "vmAdm": {
+            "value": "azureuser"
+        },
+        "vmPass": {
+            "value": ""
+        },
+        "vmSize": {
+            "value": "Standard_D4s_v3"
+        }
+    }
+}

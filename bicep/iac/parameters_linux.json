@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "value": "czm14-conm-ppd-euw-edgedevice-vnet"
+        },
+        "rgName": {
+            "value": "czm14-conm-ppd-euw-vmfactory-rg"
+        },
+        "subnetName": {
+            "value": "czm14-conm-ppd-euw-edgedevice-snet"
+        },
+        "location": {
+            "value": "westeurope"
+        },
+        "environment": {
+            "value": "ppd"
+        },
+        "linuxVm1Name": {
+            "value": "czm14conmppdeuwvmtestdevice"
+        },
+        "linuxVm1ComName": {
+            "value": "conmppdeuwvmtestdevice"
+        },
+        "vmAdm": {
+            "value": "azureuser"
+        },
+        "vmPass": {
+            "value": ""
+        },
+        "vmSize": {
+            "value": "Standard_D4s_v3"
+        }
+    }
+}

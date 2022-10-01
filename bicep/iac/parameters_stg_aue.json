@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "value": "czm14-conm-stg-aue-edgedevice-vnet"
+        },
+        "addressSpace": {
+            "value": "10.59.0.0/16"
+        },
+        "location": {
+            "value": "AustraliaEast"
+        },
+        "environment": {
+            "value": "stg"
+        },
+        "bstName": {
+            "value": "czm14-conm-stg-aue-bastion-abh"
+        },
+        "luxVm1Name": {
+            "value": "czm14conmstgauevmtestdevice"
+        },
+        "luxVm1ComName": {
+            "value": "conmstgauevmtestdevice"
+        },
+        "vmAdm": {
+            "value": "azureuser"
+        },
+        "vmPass": {
+            "value": ""
+        },
+        "vmSize": {
+            "value": "Standard_D4s_v3"
+        }
+    }
+}
