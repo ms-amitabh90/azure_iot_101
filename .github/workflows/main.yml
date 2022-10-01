@@ -20,7 +20,8 @@ jobs:
       uses: Azure/cli@v1
       with:
         # Specify the script here
-        inlineScript: az deployment sub create \
+        inlineScript: |
+          az deployment sub create \
           --name demoSubDeployment \
           --location eastus \
           --template-file ./bicep/iac/modules/resourcegroup.bicep
