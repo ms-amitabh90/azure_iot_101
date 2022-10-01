@@ -7,6 +7,7 @@ jobs:
 
       # Checkout code
     - uses: actions/checkout@main
+
     - name: Azure Login
       uses: Azure/cli@v1
       with:
@@ -14,31 +15,17 @@ jobs:
         inlineScript: |
             az login --service-principal -u ${{ secrets.AZURE_AD_CLIENT_ID }} -p ${{ secrets.AZURE_AD_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_AD_TENANT_ID }}
             az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    - name: Azure PowerShell Action
-      uses: Azure/powershell@v1
+
+    - name: Deploy_RG
+      uses: Azure/cli@v1
       with:
-        # Specify the Az PowerShell script here.
-        inlineScript: |
-         Select-AzSubscription -Subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          $location = "East US"
-          $resourceGroupName = "iotlab-101"
-          if (!(Get-AzResourceGroup $resourceGroupName -ErrorAction SilentlyContinue)) {
-              try {
-                  # The resource group does not exist so create it
-                  Write-Host "Creating the $resourceGroupName resource group"
-                  New-AzResourceGroup -Name $resourceGroupName -Location $location -ErrorAction SilentlyContinue
-              }
-              catch {
-                  # There was an error creating the resoruce group
-                  Write-Host "There was an error creaating the $resourceGroupName resource group" -ForegroundColor Red
-                  Break
-              }
-          }
-          else {
-              # The resoruce group already exists so there is nothing to do
-              Write-Host "The $resourceGroupName resource group already exists"
-          }
-    - name: Bicep Deploy
+        # Specify the script here
+        inlineScript: az deployment sub create \
+          --name demoSubDeployment \
+          --location eastus \
+          --template-file ./bicep/iac/modules/resourcegroup.bicep
+
+    - name: Deploy_EdgeDevices
       uses: Azure/cli@v1
       with:
         # Specify the script here

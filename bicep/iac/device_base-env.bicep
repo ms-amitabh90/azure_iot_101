@@ -1,3 +1,5 @@
+targetScope = 'resourceGroup'
+
 param addressSpace string = '10.59.0.0/16'
 param vnetName string = 'vnet-iotlab'
 param location string = resourceGroup().location
