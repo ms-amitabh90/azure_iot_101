@@ -11,25 +11,4 @@ jobs:
       uses: Azure/cli@v1
       with:
         # Specify the script here
-        inlineScript: az login --service-principal -u fc852890-601d-4b22-9367-2801355bd9b2 -p 4-_8Q~4fMj45TqbzqRSdBGSoXh.fcopzzEUHXcvW --tenant 72f988bf-86f1-41af-91ab-2d7cd011db47
-        # Azure CLI version to be used to execute the script. If not provided, latest version is used
-
-    - name: Azure Login
-      uses: Azure/login@v1.4.2
-      with:
-        # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        # ClientId of the Azure Service principal created.
-        client-id: ${{ secrets.AZURE_AD_CLIENT_ID }}
-        # TenantId of the Azure Service principal created.
-        tenant-id: ${{ secrets.AZURE_AD_TENANT_ID }}
-        # Azure subscriptionId
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        # Set this value to true to enable Azure PowerShell Login in addition to Az CLI login
-        enable-AzPSSession: true
-        # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
-        environment: azurecloud
-        # Set this value to true to enable support for accessing tenants without subscriptions
-        allow-no-subscriptions: true
-        # Provide audience field for access-token. Default value is api://AzureADTokenExchange
-        audience: api://AzureADTokenExchange
+        inlineScript: az login --service-principal -u ${{ secrets.AZURE_AD_CLIENT_ID }} -p ${{ secrets.AZURE_AD_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_AD_TENANT_ID }}
